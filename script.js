@@ -91,8 +91,9 @@ class Tree {
   find(value, node = this.root) {
     if (!node) return 'Not found';
     if (node.value === value) return node;
-    else if (value < node.value) return this.find(value, node.left);
-    else return this.find(value, node.right);
+    return value < node.value
+      ? this.find(value, node.left)
+      : this.find(value, node.right);
   }
 }
 
