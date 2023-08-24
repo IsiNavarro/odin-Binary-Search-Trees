@@ -95,9 +95,9 @@ class Tree {
       ? this.find(value, node.left)
       : this.find(value, node.right);
   }
-  levelOrder(arr = [], queue = [], node = this.root) {
+  levelOrder(array = [], queue = [], node = this.root) {
     if (node === null) return;
-    arr.push(node.value);
+    array.push(node.value);
 
     queue.push(node.left);
     queue.push(node.right);
@@ -105,10 +105,43 @@ class Tree {
     while (queue.length) {
       const level = queue[0];
       queue.shift();
-      this.levelOrder(arr, queue, level);
+      this.levelOrder(array, queue, level);
     }
 
-    return arr;
+    return array;
+  }
+  inorder(array = [], node = this.root) {
+    if (node === null) return;
+
+    if (node.left) this.inorder(array, node.left);
+
+    array.push(node.value);
+
+    if (node.right) this.inorder(array, node.right);
+
+    return array;
+  }
+  preorder(array = [], node = this.root) {
+    if (node === null) return;
+
+    array.push(node.value);
+
+    if (node.left) this.preorder(array, node.left);
+
+    if (node.right) this.preorder(array, node.right);
+
+    return array;
+  }
+  postorder(array = [], node = this.root) {
+    if (node === null) return;
+
+    if (node.left) this.postorder(array, node.left);
+
+    if (node.right) this.postorder(array, node.right);
+
+    array.push(node.value);
+
+    return array;
   }
 
   height(node = this.root) {
