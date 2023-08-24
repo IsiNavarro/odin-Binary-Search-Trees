@@ -117,6 +117,15 @@ class Tree {
     const rightHeight = this.height(node.right);
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  depth(value, root = this.root, depth = 0) {
+    if (!value) return null;
+    else if (root === null) return 0;
+    else if (root.value === value) return depth;
+    let count = this.depth(value, root.left, depth + 1);
+    if (count !== 0) return count;
+    return this.depth(value, root.right, depth + 1);
+  }
 }
 
 //SPACE
