@@ -95,6 +95,21 @@ class Tree {
       ? this.find(value, node.left)
       : this.find(value, node.right);
   }
+  levelOrder(arr = [], queue = [], node = this.root) {
+    if (node === null) return;
+    arr.push(node.value);
+
+    queue.push(node.left);
+    queue.push(node.right);
+
+    while (queue.length) {
+      const level = queue[0];
+      queue.shift();
+      this.levelOrder(arr, queue, level);
+    }
+
+    return arr;
+  }
 
   height(node = this.root) {
     if (node === null) return -1;
