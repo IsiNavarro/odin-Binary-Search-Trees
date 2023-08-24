@@ -95,6 +95,13 @@ class Tree {
       ? this.find(value, node.left)
       : this.find(value, node.right);
   }
+
+  height(node = this.root) {
+    if (node === null) return -1;
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 }
 
 //SPACE
