@@ -159,6 +159,16 @@ class Tree {
     if (count !== 0) return count;
     return this.depth(value, root.right, depth + 1);
   }
+  isBalanced(root = this.root) {
+    const leftHeight = this.height(root.left);
+    const rightHeight = this.height(root.right);
+    const diff = Math.abs(leftHeight - rightHeight);
+    return diff < 2 ? 'true' : 'false';
+  }
+  rebalance() {
+    let array = this.levelOrder();
+    return (this.root = this.buildTree(array));
+  }
 }
 
 //SPACE
