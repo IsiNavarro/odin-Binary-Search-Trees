@@ -1,5 +1,5 @@
 class Node {
-  constructor(value, left = null, right = null) {
+  constructor(value = null, left = null, right = null) {
     this.value = value;
     this.left = left;
     this.right = right;
@@ -60,6 +60,13 @@ class Tree {
     root.right = this.buildTree(rightArray);
 
     return root;
+  }
+  insert(value, node = this.root) {
+    if (node === null) return new Node(value);
+    node.key < value
+      ? (node.right = this.insert(value, node.right))
+      : (node.left = this.insert(value, node.left));
+    return node;
   }
 }
 const prettyPrint = (node, prefix = '', isLeft = true) => {
