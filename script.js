@@ -63,12 +63,34 @@ class Tree {
   }
   insert(value, node = this.root) {
     if (node === null) return new Node(value);
-    node.key < value
+    node.value < value
       ? (node.right = this.insert(value, node.right))
       : (node.left = this.insert(value, node.left));
     return node;
   }
+  #minValue(node) {
+    let minv = node.value;
+    while (node.left != null) {
+      minv = node.left.value;
+      node = node.left;
+    }
+    return minv;
+  }
+  delete(value, node = this.root) {
+    if (node === null) return node;
+    if (node.value < value) node.right = this.delete(value, node.right);
+    else if (node.value > value) node.left = this.delete(value, node.left);
+    else {
+      if (node.left === null) return node.right;
+      else if (node.right === null) return node.left;
+      node.value = this.#minValue(node.right);
+      node.right = this.delete(value, node.right);
+    }
+    return node;
+  }
 }
+
+//SPACE
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return;
